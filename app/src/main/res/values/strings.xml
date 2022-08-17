@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Menu</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_order">Order History</string>
+    <string name="title_cart">Cart</string>
+    <string name="burger_1">Beef cutlet, cheese, tomato</string>
+    <string name="burger_2">Beef cutlet, cheese  </string>
+    <string name="burger_3">Beef cutlet, cheese, egg </string>
+    <string name="burger_4">Chicken cutlet, cheese, tomato </string>
+    <string name="burger_5">Veg Cutlet,cheese,tomato </string>
+    <string name="burger_6">Veg Cutlet,tomato</string>
+    <string name="veggie_pizza"> tomato, garlic, oregano, olive </string>
+    <string name="mushroom_pizza">  mushroom, mozzarella, olive </string>
+    <string name="Chicken_pizza">  Chicken, mozzarella, mushroom  </string>
+    <string name="assorted">  assorted  </string>
+    <string name="chicken_tika">tomato, garlic, green chillies</string>
+    <string name="american_hot"> mozzarella, chilli peppers </string>
+    <string name="Veggie_overlord"> tomato, mushroom, broccoli</string>
+    <string name="cancel_order">CANCEL ORDER</string>
+    <string name="phone_number">Phone number</string>
+    <string name="date_and_time">Date and Time</string>
+    <string name="address">Address</string>
+    <string name="name">name</string>
+    <string name="todo">TODO</string>
+    <string name="price">price</string>
+    <string name="add_cart">ADD TO CART</string>
+    <string name="minus">-</string>
+    <string name="_1"> 1 </string>
+    <string name="plus">+</string>
+    <string name="dollar">$</string>
+    <string name="description">Description</string>
+    <string name="go_to_menu">GO TO MENU</string>
+    <string name="requires_address_phone">Placing an order requires your phone number and address</string>
+    <string name="CONTINUE">Continue</string>
+    <string name="CANCEL">Cancel</string>
+    <string name="update_cart">UPDATE CART</string>
+    <string name="continue_to_checkout">CONTINUE TO CHECKOUT</string>
+    <string name="you_have_not_order">You have not made any order yet</string>
+
+</resources>
