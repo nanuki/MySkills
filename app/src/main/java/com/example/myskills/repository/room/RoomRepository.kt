@@ -5,7 +5,7 @@ import com.example.myskills.R
 import com.example.myskills.Repository
 
 class RoomRepository(val context: Context): Repository {
-    var sessionManager = SharedPrefRepo(context)
+    private var sessionManager = SharedPrefRepo(context)
     override fun createMenu() {
         sessionManager.saveAuthToken("aaa")
         val pizza1 = MenuEntity(0,"Veggie pizza","",1, context.getString(R.string.veggie_pizza),"","pizza",10,1)

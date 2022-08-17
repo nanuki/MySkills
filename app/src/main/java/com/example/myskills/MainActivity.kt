@@ -19,8 +19,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    val viewmodel : MainViewModel by viewModel()
-    val scope = CoroutineScope(Dispatchers.IO)
+    private val viewmodel : MainViewModel by viewModel()
+    private val scope = CoroutineScope(Dispatchers.IO)
     var totalcount = -1
 
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 viewmodel.createMenu()
                 viewmodel.creatOrder()
                 delay(500)
-                viewmodel.showMenu_1()
+                viewmodel.showmenu1()
             }
 
         }
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         viewmodel.badge.observe(this) {
 
 
-            val menuItemId: Int = navView.getMenu().getItem(2).getItemId()
+            val menuItemId: Int = navView.menu.getItem(2).itemId
             val badge: BadgeDrawable = navView.getOrCreateBadge(menuItemId)
 
             if (it == 0 ) {

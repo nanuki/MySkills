@@ -11,12 +11,10 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class MainViewModel:  ViewModel(), KoinComponent {
-    val repo : RoomRepository by inject()
-    var x = 0
-    var k = 0
-    var countbusket = 0
+    private val repo : RoomRepository by inject()
+    private var k = 0
 
-    var productcount = 0
+
 
     private val _listMenuEntity = MutableLiveData<MutableList<MenuEntity>>()
     var listMenuEntity : MutableLiveData<MutableList<MenuEntity>> = _listMenuEntity
@@ -99,23 +97,7 @@ class MainViewModel:  ViewModel(), KoinComponent {
         }
     }
 
-    fun getOrdertotalcount(): Int{
 
-        viewModelScope.launch(Dispatchers.IO){
-            x = repo.getOrdertotalcount()
-        }
-        return x
-
-    }
-
-    fun getOrdertotalprice(): Int{
-
-        viewModelScope.launch(Dispatchers.IO){
-            x =  repo.getOrdertotalprice()
-        }
-        return x
-
-    }
 
     fun updateOrder(orderEntity: OrderEntity){
         viewModelScope.launch(Dispatchers.IO){
@@ -137,7 +119,7 @@ class MainViewModel:  ViewModel(), KoinComponent {
 
 
 
-    fun showMenu_1(){
+    fun showmenu1(){
         viewModelScope.launch(Dispatchers.IO){
             listMenuEntity.postValue(repo.getMenue())
         }
@@ -156,13 +138,6 @@ class MainViewModel:  ViewModel(), KoinComponent {
         viewModelScope.launch(Dispatchers.IO){
             listMenuBusket.postValue(repo.getBuscet())
         }
-    }
-    fun getBuscetData(id: Int): Int{
-        var count = 0
-        viewModelScope.launch(Dispatchers.IO){
-            count =  repo.getBuscetdatabyid(id).count
-        }
-        return count
     }
 
     fun calculatecount(b: Boolean): Int {
@@ -195,10 +170,6 @@ class MainViewModel:  ViewModel(), KoinComponent {
                 badge.postValue(y)
             }
         }
-
-
-
-
 
         return y
     }
@@ -238,15 +209,8 @@ class MainViewModel:  ViewModel(), KoinComponent {
         totalprice.postValue(number)
     }
 
-    fun getOrerData():OrderEntity{
-        return repo.getOrderData()
-    }
 
-    fun updatebasketstate(id:Int, state :Boolean){
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.updateBuscetstate(id,state)
-        }
-    }
+
 
     fun createsentorder(sentorderEntity: SentorderEntity){
         viewModelScope.launch(Dispatchers.IO) {

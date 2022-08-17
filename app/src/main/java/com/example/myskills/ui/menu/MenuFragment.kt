@@ -65,7 +65,7 @@ class MenuFragment : Fragment() {
 
         }
 
-        homeViewModel.showMenu_1()
+        homeViewModel.showmenu1()
 
         return root
     }

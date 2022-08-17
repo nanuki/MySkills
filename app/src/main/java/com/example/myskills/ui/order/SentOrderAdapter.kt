@@ -16,11 +16,11 @@ import org.koin.core.component.KoinComponent
 
 class SentOrderAdapter(
     val context: Context,
-    val data: MutableList<SentorderEntity>,
-    var orderViewModel: MainViewModel
+    private val data: MutableList<SentorderEntity>,
+    private var orderViewModel: MainViewModel
 ): RecyclerView.Adapter<SentOrderAdapter.CustomHelder>(), KoinComponent {
 
-    val scope = CoroutineScope(Dispatchers.IO)
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     class CustomHelder(itemView: View): RecyclerView.ViewHolder(itemView){
         var address : TextView

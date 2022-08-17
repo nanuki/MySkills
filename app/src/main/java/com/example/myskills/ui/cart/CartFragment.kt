@@ -142,6 +142,8 @@ class CartFragment : Fragment(), KoinComponent {
 
 
     fun crateOrder() {
+        cartViewModel.getBuscet()
+        cartViewModel.getOrder()
         val builder = context?.let { AlertDialog.Builder(it) }
         val orderBinding = FragmentMakeOrderBinding.inflate(layoutInflater)
         builder?.setView(orderBinding.root)
@@ -154,13 +156,16 @@ class CartFragment : Fragment(), KoinComponent {
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val minute = calendar.get(Calendar.MINUTE)
             val datetime = "$day/$month/$year // $hour:$minute"
-            val orderEntity = OrderEntity(1, "00.00.00", false, "kk", "", 0, 0)
-            cartViewModel.updateOrder(orderEntity)
+
             sentorder.date = datetime
             sentorder.adres = orderBinding.address.text.toString()
             sentorder.phone_number = orderBinding.phone.text.toString()
 
             cartViewModel.createsentorder(sentorder)
+
+            val orderEntity = OrderEntity(1, "00.00.00", false, "kk", "", 0, 0)
+            cartViewModel.updateOrder(orderEntity)
+
             scope.launch {
                 val list: MutableList<CartEntity> = cartViewModel.getbusketdata()
                 for (item in list) {
