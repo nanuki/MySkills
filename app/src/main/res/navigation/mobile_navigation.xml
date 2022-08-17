@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.example.myskills.ui.menu.DescriptionFragment"
-        android:label="fragment_description"
+        android:label="Description"
         tools:layout="@layout/fragment_description" >
         <action
             android:id="@+id/action_descriptionFragment_to_navigation_menu"

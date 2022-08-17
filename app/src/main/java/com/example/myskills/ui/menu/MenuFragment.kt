@@ -13,7 +13,7 @@ import com.example.myskills.repository.room.MenuEntity
 
 class MenuFragment : Fragment() {
 
-    val homeViewModel : MainViewModel by activityViewModels()
+    private val homeViewModel : MainViewModel by activityViewModels()
 
 
     private var _binding: FragmentMenuBinding? = null
@@ -32,32 +32,32 @@ class MenuFragment : Fragment() {
         val root: View = binding.root
 
         homeViewModel.listMenuEntity.observe(viewLifecycleOwner){
-            val list_1 = mutableListOf<MenuEntity>()
-            val list_2 = mutableListOf<MenuEntity>()
-            val list_3 = mutableListOf<MenuEntity>()
+            val list1 = mutableListOf<MenuEntity>()
+            val list2 = mutableListOf<MenuEntity>()
+            val list3 = mutableListOf<MenuEntity>()
             for (item in it){
-                if (item.category.equals("pizza")){
-                    list_1.add(item)
+                if (item.category == "pizza"){
+                    list1.add(item)
                 }
-                if (item.category.equals("burger")){
-                    list_2.add(item)
+                if (item.category == "burger"){
+                    list2.add(item)
                 }
-                if (item.category.equals("juice")){
-                    list_3.add(item)
+                if (item.category == "juice"){
+                    list3.add(item)
                 }
             }
-            val recycleradapter = MenuFragmentAdaptor(root.context,list_1,binding.root,homeViewModel)
+            val recycleradapter = MenuFragmentAdaptor(root.context,list1,binding.root,homeViewModel)
             _binding!!.recyclerviewPizza.adapter = recycleradapter
             _binding!!.recyclerviewPizza.layoutManager = LinearLayoutManager(root.context,
                 LinearLayoutManager.HORIZONTAL, false)
 
-            val recycleradapter_2 = MenuFragmentAdaptor(root.context,list_2,binding.root,homeViewModel)
-            _binding!!.recyclerviewBurger.adapter = recycleradapter_2
+            val recycleradapter2 = MenuFragmentAdaptor(root.context,list2,binding.root,homeViewModel)
+            _binding!!.recyclerviewBurger.adapter = recycleradapter2
             _binding!!.recyclerviewBurger.layoutManager = LinearLayoutManager(root.context,
                 LinearLayoutManager.HORIZONTAL, false)
 
-            val recycleradapter_3= MenuFragmentAdaptor(root.context,list_3,binding.root,homeViewModel)
-            _binding!!.recyclerviewJuice.adapter = recycleradapter_3
+            val recycleradapter3= MenuFragmentAdaptor(root.context,list3,binding.root,homeViewModel)
+            _binding!!.recyclerviewJuice.adapter = recycleradapter3
             _binding!!.recyclerviewJuice.layoutManager = LinearLayoutManager(root.context,
                 LinearLayoutManager.HORIZONTAL, false)
 

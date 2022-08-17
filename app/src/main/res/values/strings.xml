@@ -36,5 +36,6 @@
     <string name="update_cart">UPDATE CART</string>
     <string name="continue_to_checkout">CONTINUE TO CHECKOUT</string>
     <string name="you_have_not_order">You have not made any order yet</string>
+    <string name="Oops">Oops, its empty here!</string>
 
 </resources>

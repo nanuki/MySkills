@@ -1,7 +1,6 @@
 package com.example.myskills.ui.cart
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +30,6 @@ class CartFragment : Fragment(), KoinComponent {
     var status = false
     var order : OrderEntity? = null
     val cartViewModel : MainViewModel by activityViewModels()
-    var list = mutableListOf<CartEntity>()
 
     private lateinit var sentorder: SentorderEntity
 
@@ -90,10 +88,10 @@ class CartFragment : Fragment(), KoinComponent {
 
 
             if (count == 0) {
-                _binding!!.buttonMakeOrder.setText("GO TO MENU")
+                _binding!!.buttonMakeOrder.text = getString(R.string.go_to_menu)
 
             } else {
-                _binding!!.buttonMakeOrder.setText(getString(R.string.continue_to_checkout))
+                _binding!!.buttonMakeOrder.text = getString(R.string.continue_to_checkout)
 
                 order = OrderEntity(1, it.date, it.status, "", it.phone_number, count, price)
 
@@ -104,10 +102,10 @@ class CartFragment : Fragment(), KoinComponent {
 
         cartViewModel.totalprice.observe(viewLifecycleOwner) {
             if (it == 0) {
-                _binding!!.price.setText("")
+                _binding!!.price.text = ""
 
             } else {
-                _binding!!.price.setText("PRICE($it$)")
+                _binding!!.price.text = "PRICE($it$)"
             }
 
 
@@ -116,9 +114,9 @@ class CartFragment : Fragment(), KoinComponent {
         cartViewModel.badge.observe(viewLifecycleOwner) {
 
             if (it == 0 ) {
-                _binding!!.count.setText("Oops, its empty here!")
+                _binding!!.count.text = getString(R.string.Oops)
             } else {
-                _binding!!.count.setText("ITEMS ($it)")
+                _binding!!.count.text = "ITEMS ($it)"
 
             }
         }
@@ -127,21 +125,10 @@ class CartFragment : Fragment(), KoinComponent {
 
 
         cartViewModel.listMenuBusket.observe(viewLifecycleOwner) {
-            // val navView: BottomNavigationView = binding.navView
-
-
-//            for (item in it){
-//                if (item.state == false){
-//                    list.add(item)
-//
-//                }
-//            }
 
             val recycleradapter = CartAdaptor(root.context,it,cartViewModel)
             _binding!!.recyclerview.adapter = recycleradapter
             _binding!!.recyclerview.layoutManager = LinearLayoutManager(root.context)
-
-
 
 
         }
@@ -154,25 +141,12 @@ class CartFragment : Fragment(), KoinComponent {
 
 
 
-//    private fun makeOrder() {
-//        val current = LocalDateTime.now().toString()
-//        order?.date = current
-//        order?.let { busketViewModel.updateOrder(it) }
-//        order?.status = true
-//
-//
-//    }
-
-
     fun crateOrder() {
         val builder = context?.let { AlertDialog.Builder(it) }
-        // builder?.setTitle(getString(R.string.requires_address_phone))
-
-        //  val view = LayoutInflater.from(context).inflate(R.layout.fragment_make_order,binding.root,false)
         val orderBinding = FragmentMakeOrderBinding.inflate(layoutInflater)
         builder?.setView(orderBinding.root)
 
-        builder?.setPositiveButton(getString(R.string.CONTINUE), DialogInterface.OnClickListener { dialogInterface, i ->
+        builder?.setPositiveButton(getString(R.string.CONTINUE)) { dialogInterface, i ->
             val calendar = Calendar.getInstance()
             val day = calendar.get(Calendar.DAY_OF_MONTH)
             val month = calendar.get(Calendar.MONTH)
@@ -180,8 +154,8 @@ class CartFragment : Fragment(), KoinComponent {
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val minute = calendar.get(Calendar.MINUTE)
             val datetime = "$day/$month/$year // $hour:$minute"
-            val orderEntity = OrderEntity(1,"00.00.00",false,"kk","",0,0)
-            cartViewModel.updateOrder(orderEntity )
+            val orderEntity = OrderEntity(1, "00.00.00", false, "kk", "", 0, 0)
+            cartViewModel.updateOrder(orderEntity)
             sentorder.date = datetime
             sentorder.adres = orderBinding.address.text.toString()
             sentorder.phone_number = orderBinding.phone.text.toString()
@@ -189,7 +163,7 @@ class CartFragment : Fragment(), KoinComponent {
             cartViewModel.createsentorder(sentorder)
             scope.launch {
                 val list: MutableList<CartEntity> = cartViewModel.getbusketdata()
-                for (item in list){
+                for (item in list) {
                     cartViewModel.deletBusket(item.id)
                 }
                 cartViewModel.resetbadge(0)
@@ -199,12 +173,11 @@ class CartFragment : Fragment(), KoinComponent {
             Navigation.findNavController(binding.root).navigate(R.id.navigation_menu)
 
 
-
-        })
-        builder?.setNegativeButton(getString(R.string.CANCEL), DialogInterface.OnClickListener { dialogInterface, i ->
+        }
+        builder?.setNegativeButton(getString(R.string.CANCEL)) { dialogInterface, i ->
             Navigation.findNavController(binding.root).navigate(R.id.navigation_cart)
             dialogInterface.cancel()
-        })
+        }
         builder?.show()
 
     }

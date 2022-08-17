@@ -16,15 +16,15 @@ import org.koin.core.component.KoinComponent
 
 class CartAdaptor(
     val context: Context,
-    val data: MutableList<CartEntity>,
-    val viewModel: MainViewModel
+    private val data: MutableList<CartEntity>,
+    private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<CartAdaptor.CustomHelder>(),
     KoinComponent {
 
 
-    val scope = CoroutineScope(Dispatchers.IO)
-    var countproduct = 0
-    var priceproduct = 0
+    private val scope = CoroutineScope(Dispatchers.IO)
+    private var countproduct = 0
+    private var priceproduct = 0
 
 
     class CustomHelder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -55,9 +55,9 @@ class CartAdaptor(
     override fun onBindViewHolder(holder: CustomHelder, position: Int) {
         val currentdata = data[getindexbyposition(position)]
 
-        holder.name.setText(currentdata.name)
-        val price_ = currentdata.count * currentdata.price
-        holder.pricetextview.text = price_.toString()
+        holder.name.text = currentdata.name
+        val price = currentdata.count * currentdata.price
+        holder.pricetextview.text = price.toString()
         holder.cunttextview.text = currentdata.count.toString()
         holder.discription.text = currentdata.description
         holder.image.setImageResource( getimage(currentdata.productid))
@@ -79,7 +79,7 @@ class CartAdaptor(
         return data.size
     }
 
-    fun getindexbyposition(position : Int): Int{
+    private fun getindexbyposition(position : Int): Int{
         return position % data.size
     }
 
@@ -89,7 +89,7 @@ class CartAdaptor(
         notifyDataSetChanged()
     }
 
-    fun getimage( id: Int): Int{
+    private fun getimage(id: Int): Int{
         var image = 0
         when(id){
             1 -> image = R.drawable.with_barbecuechicken_1
@@ -132,8 +132,8 @@ class CartAdaptor(
 
         if (x) {
             countproduct++
-            counttextview.setText("$countproduct")
-            pricetextview.setText("${countproduct*price}")
+            counttextview.text = "$countproduct"
+            pricetextview.text = "${countproduct*price}"
             totalcount = viewModel.calculatebadge(true)
             totalprice = viewModel.calculatetotalprice(true,price)
 
@@ -146,8 +146,8 @@ class CartAdaptor(
         }
         else {
             countproduct--
-            counttextview.setText("$countproduct")
-            pricetextview.setText("${countproduct*price}")
+            counttextview.text = "$countproduct"
+            pricetextview.text = "${countproduct*price}"
             totalcount = viewModel.calculatebadge(false)
             totalprice = viewModel.calculatetotalprice(false,price)
 

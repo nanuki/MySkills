@@ -17,16 +17,16 @@ import org.koin.core.component.KoinComponent
 
 class DescriptionFragment : Fragment(), KoinComponent {
 
-    var id_ = 0
-    var idproduct = 0
-    var countproduct = 0
-    var priceproduct = 0
+    private var idp = 0
+    private var idproduct = 0
+    private var countproduct = 0
+    private var priceproduct = 0
     lateinit var cartEntity : CartEntity
-    var thereisnotproduct = true
+    private var thereisnotproduct = true
     var totalcount = 0
-    var totalcountcopi = 0
+    private var totalcountcopi = 0
     var totalprice = 0
-    var add = true
+    private var add = true
 
 
 
@@ -49,16 +49,16 @@ class DescriptionFragment : Fragment(), KoinComponent {
         val root: View = binding.root
         val viewmodel: MainViewModel by activityViewModels()
 
-        id_= arguments?.getInt("id") ?: 0
+        idp= arguments?.getInt("id") ?: 0
         thereisnotproduct = arguments?.getBoolean("therisproduct") ?: true
 
 
         if(!thereisnotproduct){
-            viewmodel.getBusketdatabyid(id_)
+            viewmodel.getBusketdatabyid(idp)
         }
 
         else{
-            viewmodel.getProduct(id_)
+            viewmodel.getProduct(idp)
         }
 
 
@@ -71,13 +71,13 @@ class DescriptionFragment : Fragment(), KoinComponent {
                     viewmodel.resetbadge(totalcount+2)
                     viewmodel.resetcount(2)
                     countproduct = 2
-                    totalprice = totalprice + (2*priceproduct)
+                    totalprice += (2 * priceproduct)
                 }
                 else{
                     viewmodel.resetbadge(totalcount+1)
                     viewmodel.resetcount(2)
                     countproduct = 2
-                    totalprice  = totalprice + priceproduct
+                    totalprice += priceproduct
 
                 }
 
@@ -85,7 +85,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
             else{
                 countproduct = viewmodel.calculatecount(true)
                 totalcount = viewmodel.calculatebadge(true)
-                totalprice = totalprice + priceproduct
+                totalprice += priceproduct
             }
 
 
@@ -97,7 +97,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
 
             totalcount = viewmodel.calculatebadge(false)
             countproduct  = viewmodel.calculatecount(false)
-            totalprice = totalprice - priceproduct
+            totalprice -= priceproduct
             if(countproduct == 0){
                 if(thereisnotproduct){
                     Navigation.findNavController(binding.root).navigate(R.id.navigation_menu)
@@ -115,7 +115,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
         }
 
         viewmodel.count.observe(viewLifecycleOwner) {
-            binding.number.setText("$it")
+            binding.number.text = "$it"
 
         }
 
@@ -126,11 +126,11 @@ class DescriptionFragment : Fragment(), KoinComponent {
             priceproduct = it.price
             countproduct = it.count
             binding.image.setImageResource(getImage(it.productid))
-            binding.name.setText(it.name)
-            binding.price.setText("$priceproduct$")
-            binding.description.setText(it.description)
-            binding.button.setText(getString(R.string.update_cart))
-            binding.number.setText(it.count.toString())
+            binding.name.text = it.name
+            binding.price.text = "$priceproduct$"
+            binding.description.text = it.description
+            binding.button.text = getString(R.string.update_cart)
+            binding.number.text = it.count.toString()
             cartEntity = CartEntity(
                 0,
                 it.name,
@@ -153,11 +153,11 @@ class DescriptionFragment : Fragment(), KoinComponent {
             priceproduct = it.price
             countproduct = 1
             binding.image.setImageResource(getImage(it.id))
-            binding.name.setText(it.name)
-            binding.price.setText("$priceproduct$")
-            binding.description.setText(it.description)
-            binding.number.setText("1")
-            binding.button.setText(getString(R.string.add_cart))
+            binding.name.text = it.name
+            binding.price.text = "$priceproduct$"
+            binding.description.text = it.description
+            binding.number.text = "1"
+            binding.button.text = getString(R.string.add_cart)
             cartEntity = CartEntity(
                 0,
                 it.name,
@@ -184,16 +184,14 @@ class DescriptionFragment : Fragment(), KoinComponent {
                 totalcount = 0
                 totalprice = 0
                 totalcountcopi = totalcount
-                // viewmodel.resetbadge(totalcount)
+
 
             } else {
                 viewmodel.badge.value = it.totalcount
                 totalcount = it.totalcount
                 totalprice = it.totalprice
                 totalcountcopi = totalcount
-                //    Log.d("badge", "${viewmodel.badge.value?:0}")
 
-                //  viewmodel.resetbadge(totalcount)
             }
 
         }
@@ -201,9 +199,6 @@ class DescriptionFragment : Fragment(), KoinComponent {
         viewmodel.getOrder()
 
         binding.button.setOnClickListener {
-            //  val sendorderid = viewmodel.getsenderorderid()
-            // cartEntity.senderEntity = sendorderid
-
 
             totalcount = viewmodel.badge.value?:0
             countproduct = viewmodel.count.value?:0
@@ -248,43 +243,45 @@ class DescriptionFragment : Fragment(), KoinComponent {
         return root
     }
 
-    fun getImage(id: Int):Int{
+    private fun getImage(id_image: Int):Int{
         var find = 0
-        if (id == 1){ find = R.drawable.with_barbecuechicken_1
-        }
-        else if (id == 2){ find = R.drawable.pizza_2
-        }
-        else if (id == 3){ find = R.drawable.pizza_3
-        }
-        else if (id == 4){ find = R.drawable.pizza_4
-        }
-        else if (id == 5){ find = R.drawable.pizza_5
-        }
-        else if (id == 6){ find = R.drawable.pizza_6
-        }
-        else if (id == 7){ find = R.drawable.burger_7
-        }
-        else if (id == 8){ find = R.drawable.burger_8
-        }
-        else if (id == 9){ find = R.drawable.burger_9
-        }
-        else if (id == 10){ find = R.drawable.burger_10
-        }
-        else if (id == 11){ find = R.drawable.burger_11
-        }
-        else if (id == 12){ find = R.drawable.burger_12
-        }
-        else if (id == 13){ find = R.drawable.coca_cola
-        }
-        else if (id == 14){ find = R.drawable.fanta
-        }
-        else if (id == 15){ find = R.drawable.sprite
-        }
-        else if (id == 16){ find = R.drawable.fanta_16
-        }
-        else if (id == 17){ find = R.drawable.pepsi
-        }
-        else if (id == 18){ find = R.drawable.jermuk
+        when (id_image) {
+            1 -> { find = R.drawable.with_barbecuechicken_1
+            }
+            2 -> { find = R.drawable.pizza_2
+            }
+            3 -> { find = R.drawable.pizza_3
+            }
+            4 -> { find = R.drawable.pizza_4
+            }
+            5 -> { find = R.drawable.pizza_5
+            }
+            6 -> { find = R.drawable.pizza_6
+            }
+            7 -> { find = R.drawable.burger_7
+            }
+            8 -> { find = R.drawable.burger_8
+            }
+            9 -> { find = R.drawable.burger_9
+            }
+            10 -> { find = R.drawable.burger_10
+            }
+            11 -> { find = R.drawable.burger_11
+            }
+            12 -> { find = R.drawable.burger_12
+            }
+            13 -> { find = R.drawable.coca_cola
+            }
+            14 -> { find = R.drawable.fanta
+            }
+            15 -> { find = R.drawable.sprite
+            }
+            16 -> { find = R.drawable.fanta_16
+            }
+            17 -> { find = R.drawable.pepsi
+            }
+            18 -> { find = R.drawable.jermuk
+            }
         }
 
         return find

@@ -1,15 +1,11 @@
 package com.example.myskills.ui.menu
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
+
 import android.content.Context
 import android.os.Bundle
-import android.text.InputType
-import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
@@ -17,13 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myskills.MainViewModel
 import com.example.myskills.R
 import com.example.myskills.repository.room.MenuEntity
-import com.example.myskills.repository.room.RoomRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class MenuFragmentAdaptor(val context: Context,
                           val data: MutableList<MenuEntity>,
