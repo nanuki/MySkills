@@ -62,7 +62,7 @@ class SentOrderAdapter(
 
         holder.imageView.setOnClickListener {
             scope.launch {
-                orderViewModel.deletesentorder(currentdata.id)
+                orderViewModel.deleteSentorder(currentdata.id)
                 withContext(Dispatchers.Main){
                     deleteItem(getindexbyposition(position))
                     delay(300)

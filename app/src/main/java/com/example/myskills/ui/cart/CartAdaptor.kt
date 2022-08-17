@@ -139,7 +139,7 @@ class CartAdaptor(
 
             scope.launch{
                 viewModel.updateOrderCountandPrice(totalcount,totalprice)
-                viewModel.updateBusketcount(id,countproduct)
+                viewModel.updateCartcount(id,countproduct)
             }
 
 
@@ -155,13 +155,13 @@ class CartAdaptor(
             if (countproduct == 0) {
                 scope.launch {
                     viewModel.updateOrderCountandPrice(totalcount, totalprice )
-                    viewModel.deletBusket(id)
+                    viewModel.deleteCart(id)
                     withContext(Dispatchers.Main){
                         deleteItem(getindexbyposition(position))
                     }
                     delay(100)
                     viewModel.getOrder()
-                    viewModel.getBuscet()
+                    viewModel.getCart()
                 }
 
             }
@@ -169,7 +169,7 @@ class CartAdaptor(
             else{
                 scope.launch{
                     viewModel.updateOrderCountandPrice(totalcount, totalprice)
-                    viewModel.updateBusketcount(id,countproduct)
+                    viewModel.updateCartcount(id,countproduct)
 
                 }
 

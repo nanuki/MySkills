@@ -2,7 +2,8 @@ package com.example.myskills.repository.room
 
 import android.content.Context
 import com.example.myskills.R
-import com.example.myskills.Repository
+import com.example.myskills.repository.Repository
+import com.example.myskills.repository.SharedPrefRepo
 
 class RoomRepository(val context: Context): Repository {
     private var sessionManager = SharedPrefRepo(context)
@@ -38,8 +39,8 @@ class RoomRepository(val context: Context): Repository {
         DB.getInstance(context).getDao().createMenu(list)
     }
 
-    override fun getMenue() :MutableList<MenuEntity> {
-        return  DB.getInstance(context).getDao().getAllmenudata()
+    override fun getMenu() :MutableList<MenuEntity> {
+        return  DB.getInstance(context).getDao().getMenudata()
 
     }
 
@@ -75,43 +76,43 @@ class RoomRepository(val context: Context): Repository {
     }
 
     override fun isfirstTime(): Boolean {
-        return sessionManager.isregisterUser()
+        return sessionManager.isfirstTime()
     }
 
-    override fun creatBuscet(cartEntity: CartEntity) {
-        DB.getInstance(context).getDao().createBuscetdata(cartEntity)
+    override fun createCart(cartEntity: CartEntity) {
+        DB.getInstance(context).getDao().createCartdata(cartEntity)
     }
 
-    override  fun getBuscet(): MutableList<CartEntity>  {
-        return  DB.getInstance(context).getDao().getBuscetdata()
+    override  fun getCart(): MutableList<CartEntity>  {
+        return  DB.getInstance(context).getDao().getCartdata()
     }
 
-    override fun getBuscetdatabyid(id: Int): CartEntity {
-        return  DB.getInstance(context).getDao().getBuscetdatabyid(id)
+    override fun getCartdatabyid(id: Int): CartEntity {
+        return  DB.getInstance(context).getDao().getCartdatabyid(id)
     }
 
-    override fun deleteBusket(id: Int) {
-        DB.getInstance(context).getDao().deleteBuscet(id)
+    override fun deleteCart(id: Int) {
+        DB.getInstance(context).getDao().deleteCart(id)
     }
 
-    override fun updateBusketcount(id: Int, count: Int) {
-        DB.getInstance(context).getDao().updateBuscetcount(id, count)
+    override fun updateCartcount(id: Int, count: Int) {
+        DB.getInstance(context).getDao().updateCartcount(id, count)
     }
 
-    override fun updateBuscetstate(id: Int, state: Boolean) {
-        DB.getInstance(context).getDao().updateBuscetstate(id,state)
+    override fun updateCartstate(id: Int, state: Boolean) {
+        DB.getInstance(context).getDao().updateCartstate(id,state)
     }
 
-    override fun createsentorder(sentorderEntity: SentorderEntity) {
-        DB.getInstance(context).getDao().createsentorder(sentorderEntity)
+    override fun createSentorder(sentorderEntity: SentorderEntity) {
+        DB.getInstance(context).getDao().createSentorder(sentorderEntity)
     }
 
-    override fun deletesentorder(id: Int) {
-        DB.getInstance(context).getDao().deletesentorder(id)
+    override fun deleteSentorder(id: Int) {
+        DB.getInstance(context).getDao().deleteSentorder(id)
     }
 
     override fun getSentosrderdata(): MutableList<SentorderEntity> {
-        return DB.getInstance(context).getDao().getSentosrderdata()
+        return DB.getInstance(context).getDao().getSentorderdata()
     }
 
 }

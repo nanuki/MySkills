@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         if (!viewmodel.isfirstTime()){
             scope.launch {
                 viewmodel.createMenu()
-                viewmodel.creatOrder()
+                viewmodel.createOrder()
                 delay(500)
                 viewmodel.showmenu1()
             }

@@ -22,8 +22,8 @@ class MainViewModel:  ViewModel(), KoinComponent {
     private val _listMenuBusket = MutableLiveData<MutableList<CartEntity>>()
     var listMenuBusket : MutableLiveData<MutableList<CartEntity>> = _listMenuBusket
 
-    private val _busket= MutableLiveData<CartEntity>()
-    var busket : MutableLiveData<CartEntity> = _busket
+    private val _cart= MutableLiveData<CartEntity>()
+    var cart : MutableLiveData<CartEntity> = _cart
 
     private val _listSentorder = MutableLiveData<MutableList<SentorderEntity>>()
     var listSentorder : MutableLiveData<MutableList<SentorderEntity>> = _listSentorder
@@ -53,38 +53,47 @@ class MainViewModel:  ViewModel(), KoinComponent {
     fun getProduct(id:Int){
         viewModelScope.launch(Dispatchers.IO){
             product.postValue( repo.getProductbyid(id))
-
         }
     }
 
+    fun createCart(cartEntity: CartEntity){
+        viewModelScope.launch(Dispatchers.IO){
+            repo.createCart(cartEntity)
+        }
+    }
 
-    fun deletBusket(id: Int){
+    fun deleteCart(id: Int){
         viewModelScope.launch (Dispatchers.IO) {
-            repo.deleteBusket(id)
+            repo.deleteCart(id)
         }
-
     }
 
-    fun updateBusketcount(id: Int, count : Int){
+    fun updateCartcount(id: Int, count : Int){
         viewModelScope.launch (Dispatchers.IO) {
-            repo.updateBusketcount(id,count)
+            repo.updateCartcount(id,count)
         }
 
     }
 
-    fun getBusketdatabyid(id:Int){
+    fun getCartdatabyid(id:Int){
         viewModelScope.launch (Dispatchers.IO){
-            busket.postValue(repo.getBuscetdatabyid(id))
+            cart.postValue(repo.getCartdatabyid(id))
         }
 
     }
 
-    fun getbusketdata(): MutableList<CartEntity>{
-        return repo.getBuscet()
+    fun getCartdata(): MutableList<CartEntity>{
+        return repo.getCart()
+    }
+
+    fun getCart(){
+        viewModelScope.launch(Dispatchers.IO){
+            listMenuBusket.postValue(repo.getCart())
+        }
     }
 
 
-    fun creatOrder(){
+    fun createOrder(){
         viewModelScope.launch(Dispatchers.IO){
             repo.createOrder()
         }
@@ -99,56 +108,40 @@ class MainViewModel:  ViewModel(), KoinComponent {
 
 
 
+
+
     fun updateOrder(orderEntity: OrderEntity){
         viewModelScope.launch(Dispatchers.IO){
             repo.updateOrder(orderEntity)
         }
-
     }
     fun updateOrderCountandPrice(totalcount :Int, totalPrice :Int){
         viewModelScope.launch(Dispatchers.IO){
             repo.updateOrderCountandPrice(1, totalcount,totalPrice)
         }
     }
-
     fun createMenu(){
         viewModelScope.launch(Dispatchers.IO){
             repo.createMenu()
         }
     }
-
-
-
     fun showmenu1(){
         viewModelScope.launch(Dispatchers.IO){
-            listMenuEntity.postValue(repo.getMenue())
+            listMenuEntity.postValue(repo.getMenu())
         }
     }
+
 
     fun isfirstTime():Boolean{
         return repo.isfirstTime()    }
 
-    fun creatBuscet(cartEntity: CartEntity){
-        viewModelScope.launch(Dispatchers.IO){
-            repo.creatBuscet(cartEntity)
-        }
-    }
-
-    fun getBuscet(){
-        viewModelScope.launch(Dispatchers.IO){
-            listMenuBusket.postValue(repo.getBuscet())
-        }
-    }
 
     fun calculatecount(b: Boolean): Int {
         var y = count.value?: 0
-
         if (b){ y++ }
         else { y-- }
         count.postValue(y)
-
         return y
-
     }
 
     fun resetcount(countproduct: Int) {
@@ -158,7 +151,6 @@ class MainViewModel:  ViewModel(), KoinComponent {
     fun resetbadge(number: Int) {
         badge.postValue(number)
     }
-
 
     fun getbedgenumber(): Int{
         var y = 0
@@ -212,28 +204,21 @@ class MainViewModel:  ViewModel(), KoinComponent {
 
 
 
-    fun createsentorder(sentorderEntity: SentorderEntity){
+    fun createSentorder(sentorderEntity: SentorderEntity){
         viewModelScope.launch(Dispatchers.IO) {
-            repo.createsentorder(sentorderEntity)
+            repo.createSentorder(sentorderEntity)
         }
-
     }
-
-    fun deletesentorder(id: Int){
+    fun deleteSentorder(id: Int){
         viewModelScope.launch(Dispatchers.IO) {
-            repo.deletesentorder(id)
+            repo.deleteSentorder(id)
         }
-
-
     }
     fun getsentOrderData(){
         viewModelScope.launch(Dispatchers.IO) {
             listSentorder.postValue(repo.getSentosrderdata())
         }
 
-
     }
-
-
 
 }

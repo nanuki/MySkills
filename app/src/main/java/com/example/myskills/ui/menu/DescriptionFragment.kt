@@ -54,7 +54,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
 
 
         if(!thereisnotproduct){
-            viewmodel.getBusketdatabyid(idp)
+            viewmodel.getCartdatabyid(idp)
         }
 
         else{
@@ -106,7 +106,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
                 else{
 
                     viewmodel.updateOrderCountandPrice( totalcount,totalprice)
-                    viewmodel.deletBusket(idproduct)
+                    viewmodel.deleteCart(idproduct)
                     Navigation.findNavController(binding.root).navigate(R.id.navigation_menu)
 
                 }
@@ -119,7 +119,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
 
         }
 
-        viewmodel.busket.observe(viewLifecycleOwner) {
+        viewmodel.cart.observe(viewLifecycleOwner) {
 
             viewmodel.count.value = it.count
             idproduct = it.id
@@ -217,7 +217,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
 
             if (thereisnotproduct){
                 cartEntity.count = countproduct
-                viewmodel.creatBuscet(cartEntity)
+                viewmodel.createCart(cartEntity)
 
                 Navigation.findNavController(binding.root).navigate(R.id.navigation_menu)
 
@@ -226,7 +226,7 @@ class DescriptionFragment : Fragment(), KoinComponent {
 
             }
             else{
-                viewmodel.updateBusketcount(idproduct ,countproduct)
+                viewmodel.updateCartcount(idproduct ,countproduct)
 
 
                 Navigation.findNavController(binding.root).navigate(R.id.navigation_menu)

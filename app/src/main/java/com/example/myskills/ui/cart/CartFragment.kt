@@ -133,7 +133,7 @@ class CartFragment : Fragment(), KoinComponent {
 
         }
 
-        cartViewModel.getBuscet()
+        cartViewModel.getCart()
 
 
         return root
@@ -142,7 +142,7 @@ class CartFragment : Fragment(), KoinComponent {
 
 
     fun crateOrder() {
-        cartViewModel.getBuscet()
+        cartViewModel.getCart()
         cartViewModel.getOrder()
         val builder = context?.let { AlertDialog.Builder(it) }
         val orderBinding = FragmentMakeOrderBinding.inflate(layoutInflater)
@@ -161,15 +161,15 @@ class CartFragment : Fragment(), KoinComponent {
             sentorder.adres = orderBinding.address.text.toString()
             sentorder.phone_number = orderBinding.phone.text.toString()
 
-            cartViewModel.createsentorder(sentorder)
+            cartViewModel.createSentorder(sentorder)
 
             val orderEntity = OrderEntity(1, "00.00.00", false, "kk", "", 0, 0)
             cartViewModel.updateOrder(orderEntity)
 
             scope.launch {
-                val list: MutableList<CartEntity> = cartViewModel.getbusketdata()
+                val list: MutableList<CartEntity> = cartViewModel.getCartdata()
                 for (item in list) {
-                    cartViewModel.deletBusket(item.id)
+                    cartViewModel.deleteCart(item.id)
                 }
                 cartViewModel.resetbadge(0)
                 cartViewModel.resettotalprice(0)

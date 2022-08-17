@@ -1,4 +1,4 @@
-package com.example.myskills.repository.room
+package com.example.myskills.repository
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -28,7 +28,7 @@ class SharedPrefRepo (val context: Context) {
     }
 
 
-    fun isregisterUser():Boolean{
+    fun isfirstTime():Boolean{
         var check  = false
         if (fetchAuthToken()?.isNotEmpty()!!){
             check = true

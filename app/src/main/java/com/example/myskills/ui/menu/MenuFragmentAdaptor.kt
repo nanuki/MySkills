@@ -80,7 +80,7 @@ class MenuFragmentAdaptor(val context: Context,
             productid = currentdata.id
             scope.launch {
 
-                    val list = viewModel.getbusketdata()
+                    val list = viewModel.getCartdata()
                     withContext(Dispatchers.Main){
                         for (item in list){
                             if(item.productid == currentdata.id){
